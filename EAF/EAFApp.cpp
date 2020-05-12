@@ -82,6 +82,13 @@ m_strWindowPlacementFormat("%u,%u,%d,%d,%d,%d,%d,%d,%d,%d")
 
    m_pHelpWindowThread = nullptr;
 
+#if defined _DEBUG
+   // enable dialog size checking in debug
+   // this will automatically alert developers of dialog boxes
+   // and property sheets exceed the maximum size per the UI design
+   CEAFSizeTestingDialog::CheckDialogSize();
+#endif
+
    // if this assert fires, we've used more than commands then are
    // reserved for EAF standard processing
    ATLASSERT(EAF_TOOLBAR_MENU_LAST < EAF_FIRST_USER_COMMAND);
@@ -112,6 +119,11 @@ int CEAFApp::Run()
 
 BOOL CEAFApp::InitInstance()
 {
+   INITCOMMONCONTROLSEX common_controls;
+   common_controls.dwSize = sizeof(INITCOMMONCONTROLSEX);
+   common_controls.dwICC = ICC_STANDARD_CLASSES;
+   VERIFY(InitCommonControlsEx(&common_controls));
+
    if (!CWinApp::InitInstance())
    {
       return FALSE;

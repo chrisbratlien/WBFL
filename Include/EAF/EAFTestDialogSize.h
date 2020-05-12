@@ -21,29 +21,11 @@
 // Olympia, WA 98503, USA or e-mail Bridge_Support@wsdot.wa.gov
 ///////////////////////////////////////////////////////////////////////
 
-#ifndef INCLUDED_EAF_EAFEXP_H_
-#define INCLUDED_EAF_EAFEXP_H_
 #pragma once
 
-// Define BUILDEAFLIB when building this library
-// For static builds, define EAFLIB
-// For static binding, define EAFLIB
-// For dynamic binding, nothing is required to be defined
-
-#if defined (BUILDEAFLIB) && !defined(EAFLIB)
-#define EAFCLASS __declspec(dllexport)
-#define EAFFUNC  __declspec(dllexport)
-#define EAFTPL   template class EAFCLASS
-#elif defined(EAFLIB)
-#define EAFCLASS
-#define EAFFUNC
-#define EAFTPL
-#else
-#define EAFCLASS __declspec(dllimport)
-#define EAFFUNC
-#define EAFTPL   extern template class EAFCLASS
-#endif
-
-#include <EAF\AutoLib.h>
-
-#endif // INCLUDED_EAF_EAFEXP_H_
+#include <EAF\EAFSizeTestingDialog.h>
+#define CDialog CEAFSizeTestingDialog
+#define CPropertyPage CEAFSizeTestingPropertyPage
+#define CPropertySheet CEAFSizeTestingPropertySheet
+//#define CMFCPropertyPage CEAFSizeTestingMFCPropertyPage
+//#define CMFCPropertySheet CEAFSizeTestingMFCPropertySheet
